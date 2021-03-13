@@ -7,7 +7,7 @@ use crate::{Word, get_best_move};
 pub fn start_loop() {
     let mut line = String::new();
     'repl: loop {
-        print!("Digite as letras disponíveis nesta jogada:");
+        eprint!("Digite as letras disponíveis nesta jogada: ");
         if io::stdin().read_line(&mut line).is_err() {
             eprintln!("{}: houve um problema na leitura de palavra.", "erro".red());
             continue;

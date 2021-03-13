@@ -1,3 +1,6 @@
+/// TODO:
+///     Replace unreachable! calls with Result and Option
+
 use std::collections::BinaryHeap;
 
 use lazy_static::lazy_static;
@@ -107,7 +110,5 @@ pub fn get_best_move(word: &Word) -> Option<&Word> {
 }
 
 fn main() {
-    // let test = Word::new("abcvoltdefaemg");
-    // println!("Test word: {:?}", get_best_move(&test));
-    
+    repl::start_loop();
 }

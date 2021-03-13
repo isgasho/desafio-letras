@@ -120,10 +120,11 @@ impl Word {
 
                 // Whitespace
                 "\u{200b}" => "",
+                "\n"       => "",
 
-                _other => {
+                other => {
                     // Should be unreachable as per the problem description
-                    // println!("Unreachable: {:?}", other);
+                    println!("Unreachable: {:?}", other);
                     unreachable!();
                 }
             })
