@@ -147,10 +147,39 @@ mod ordering_tests {
     }
 }
 
-// #[cfg(test)]
-// mod best_move_tests {
-//     #[test]
-//     fn best_move_for_batarang() {
+#[cfg(test)]
+mod best_move_tests {
 
-//     }
-// }
+    use crate::Word;
+    use crate::get_best_move;
+
+    #[test]
+    fn best_move_for_queijinho() {
+        let queijinho = Word::new("QUEIJINHO");
+
+        assert_eq!(
+            get_best_move(&queijinho).unwrap(),
+            &Word::new("queijo")
+        );
+    }
+
+    #[test]
+    fn best_move_for_raxcaaai() {
+        let raxcaaai = Word::new("raxcaaai");
+
+        assert_eq!(
+            get_best_move(&raxcaaai).unwrap(),
+            &Word::new("xícara")
+        );
+    }
+
+    #[test]
+    fn best_move_for_abcvoltdefaemg() {
+        let abcvoltdefaemg = Word::new("abcvoltdefaemg");
+
+        assert_eq!(
+            get_best_move(&abcvoltdefaemg).unwrap(),
+            &Word::new("voLtaGem")
+        );
+    }
+}

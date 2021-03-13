@@ -95,14 +95,17 @@ lazy_static! {
     };
 }
 
-fn main() {
-    let test = Word::new("QUEIJINHO");
-    println!("Test word: {}", test);
-
-    for word in WORD_BANK.iter() {
-        if test.contains(&word) {
-            println!("Best move: {}", word);
-            break;
+pub fn get_best_move(word: &Word) -> Option<&Word> {
+    for entry in WORD_BANK.iter() {
+        if word.contains(&entry) {
+            // println!("Best move: {}", entry);
+            return Some(entry);
         }
     }
+    None
+}
+
+fn main() {
+    let test = Word::new("abcvoltdefaemg");
+    println!("Test word: {:?}", get_best_move(&test));
 }
