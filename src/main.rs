@@ -108,12 +108,41 @@ pub fn get_best_move(word: &Word) -> Option<&Word> {
     None
 }
 
+pub fn get_solution(first_word: &Word) -> Vec<&Word> {
+    let mut solution = vec![];
+
+    let mut word = first_word;
+    let mut best_move = get_best_move(word);
+    
+    while !best_move.is_none() {
+        let best_move_word = best_move.unwrap();
+        solution.push(best_move_word); 
+    }
+
+    solution
+}
+
+
 fn main() {
-    let word = Word::new("hmmmm");
-    let other_word = Word::new("hmm");
+//     let word = Word::new("hmmmm");
+//     let other_word = Word::new("hmm");
 
-    let diff = word.get_occurrence_diff(&other_word);
+//     let diff = word.get_occurrence_diff(&other_word);
 
-    println!("Count: {:?}", word.occurrences);
-    println!("New count: {:?}", diff);
+//     println!("Count: {:?}", word.occurrences);
+//     println!("New count: {:?}", diff);
+    let mut count: HashMap<char, u32> = HashMap::new();
+
+    count.insert('E', 3);
+    count.insert('L', 1);
+    count.insert('Y', 1);
+
+    // let word = count
+    //     .iter()
+    //     .map(|(&char, &count)| char.to_string().repeat(count as usize))
+    //     .fold("".to_string(), |res, val| format!("{}{}", res, val));
+
+    let word = Word::from(count.clone());
+
+    println!("Generated {} from {:?}", word, count);
 }

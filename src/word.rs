@@ -54,6 +54,21 @@ impl std::fmt::Display for Word {
     }
 }
 
+impl From<HashMap<char, u32>> for Word {
+    fn from(occurrences: HashMap<char, u32>) -> Self {
+        let word = occurrences
+            .iter()
+            .map(|(&char, &count)| char.to_string().repeat(count as usize))
+            .fold("".into(), |res, val| format!("{}{}", res, val));
+
+        Self {
+            occurrences: Word::get_occurrence(&word),
+            score: Word::calculate_score(&word),
+            word,
+        }
+    }
+}
+
 impl Word {
     pub fn new(word: &str) -> Self {
         let word = Word::preprocess_word(word);
@@ -120,7 +135,7 @@ impl Word {
 
                 // Whitespace
                 "\u{200b}" => "",
-                "\n"       => "",
+                "\n" => "",
 
                 other => {
                     // Should be unreachable as per the problem description
@@ -156,10 +171,10 @@ impl Word {
     /// Note: this function assumes that first.contains(&second) == true
     pub fn get_occurrence_diff(&self, second: &Word) -> HashMap<char, u32> {
         let mut occurrences = self.occurrences.clone();
-        
+
         for (letter, count) in second.occurrences.clone() {
-            occurrences.entry(letter).and_modify(|c| { *c -= count });
-            
+            occurrences.entry(letter).and_modify(|c| *c -= count);
+
             let new_count = occurrences.get(&letter).unwrap();
             if new_count == &0 {
                 occurrences.remove_entry(&letter);
