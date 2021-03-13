@@ -4,6 +4,7 @@ use lazy_static::lazy_static;
 
 mod tests;
 mod word;
+mod repl;
 
 use word::Word;
 
@@ -106,6 +107,7 @@ pub fn get_best_move(word: &Word) -> Option<&Word> {
 }
 
 fn main() {
-    let test = Word::new("abcvoltdefaemg");
-    println!("Test word: {:?}", get_best_move(&test));
+    // let test = Word::new("abcvoltdefaemg");
+    // println!("Test word: {:?}", get_best_move(&test));
+    
 }
