@@ -1,7 +1,7 @@
 /// TODO:
 ///     Replace unreachable! calls with Result and Option
 
-use std::collections::BinaryHeap;
+use std::collections::{BinaryHeap, HashMap};
 
 use lazy_static::lazy_static;
 
@@ -102,7 +102,6 @@ lazy_static! {
 pub fn get_best_move(word: &Word) -> Option<&Word> {
     for entry in WORD_BANK.iter() {
         if word.contains(&entry) {
-            // println!("Best move: {}", entry);
             return Some(entry);
         }
     }
@@ -110,5 +109,11 @@ pub fn get_best_move(word: &Word) -> Option<&Word> {
 }
 
 fn main() {
-    repl::start_loop();
+    let word = Word::new("hmmmm");
+    let other_word = Word::new("hmm");
+
+    let diff = word.get_occurrence_diff(&other_word);
+
+    println!("Count: {:?}", word.occurrences);
+    println!("New count: {:?}", diff);
 }

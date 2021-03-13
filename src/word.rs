@@ -152,6 +152,23 @@ impl Word {
         true
     }
 
+    /// Gets the difference between the occurrence hashmaps of two words
+    /// Note: this function assumes that first.contains(&second) == true
+    pub fn get_occurrence_diff(&self, second: &Word) -> HashMap<char, u32> {
+        let mut occurrences = self.occurrences.clone();
+        
+        for (letter, count) in second.occurrences.clone() {
+            occurrences.entry(letter).and_modify(|c| { *c -= count });
+            
+            let new_count = occurrences.get(&letter).unwrap();
+            if new_count == &0 {
+                occurrences.remove_entry(&letter);
+            }
+        }
+
+        occurrences
+    }
+
     pub fn get_occurrence(word: &str) -> HashMap<char, u32> {
         let mut counts: HashMap<char, u32> = HashMap::new();
 

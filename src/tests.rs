@@ -229,3 +229,44 @@ mod preprocessing_tests {
         );
     }
 }
+
+
+#[cfg(test)]
+mod diff_tests {
+
+    use crate::Word;
+    use std::collections::HashMap;
+
+    #[test]
+    fn diff_between_abacaxi_and_abaca() {
+        let abacaxi = Word::new("abacaxi");
+        let abaca = Word::new("abaca");
+
+        let mut count: HashMap<char, u32> = HashMap::new();
+
+        count.insert('X', 1);
+        count.insert('I', 1);
+
+        assert_eq!(
+            count,
+            abacaxi.get_occurrence_diff(&abaca)
+        );
+    }
+
+    #[test]
+    fn diff_between_deadly_and_dad() {
+        let deadly = Word::new("deadly");
+        let dad = Word::new("dad");
+
+        let mut count: HashMap<char, u32> = HashMap::new();
+
+        count.insert('E', 1);
+        count.insert('L', 1);
+        count.insert('Y', 1);
+
+        assert_eq!(
+            count,
+            deadly.get_occurrence_diff(&dad)
+        );
+    }
+}
