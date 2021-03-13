@@ -1,7 +1,7 @@
 use std::cmp::Reverse;
 use std::{cmp, collections::HashMap};
 
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub struct Word {
     pub word: String,
     pub occurrences: HashMap<char, u32>,
