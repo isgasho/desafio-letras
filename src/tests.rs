@@ -1,4 +1,42 @@
 #[cfg(test)]
+mod best_move_tests {
+
+    use crate::Word;
+    use crate::get_best_move;
+
+    #[test]
+    fn best_move_for_queijinho() {
+        let queijinho = Word::new("QUEIJINHO");
+
+        assert_eq!(
+            get_best_move(&queijinho).unwrap(),
+            &Word::new("queijo")
+        );
+    }
+
+    #[test]
+    fn best_move_for_raxcaaai() {
+        let raxcaaai = Word::new("raxcaaai");
+
+        assert_eq!(
+            get_best_move(&raxcaaai).unwrap(),
+            &Word::new("xícara")
+        );
+    }
+
+    #[test]
+    fn best_move_for_abcvoltdefaemg() {
+        let abcvoltdefaemg = Word::new("abcvoltdefaemg");
+
+        assert_eq!(
+            get_best_move(&abcvoltdefaemg).unwrap(),
+            &Word::new("voLtaGem")
+        );
+    }
+}
+
+
+#[cfg(test)]
 mod word_tests {
     use crate::word::Word;
 
@@ -122,18 +160,8 @@ mod ordering_tests {
     use crate::Word;
 
     #[test]
-    fn lado_bigger_than_nada() {
-        let lado = Word::new("lado");
-        let nada = Word::new("nada");
-
-        assert_eq!(
-            // Reversing here since the ordering logic is reversed in
-            // order to obtain a min-heap
-            lado.cmp(&nada),
-            std::cmp::Ordering::Greater
-        );
-    }
-    #[test]
+    /// "queijo" has a bigger score than "goiaba", so it'll be
+    /// the bigger one
     fn queijo_bigger_than_goiaba() {
         let queijo = Word::new("queijo");
         let goiaba = Word::new("goiaba");
@@ -145,41 +173,59 @@ mod ordering_tests {
             std::cmp::Ordering::Greater
         );
     }
+
+    // TODO: words with same score but differing lengths
+
+    #[test]
+    fn lado_bigger_than_nada() {
+        let lado = Word::new("lado");
+        let nada = Word::new("nada");
+
+        assert_eq!(
+            // Reversing here since the ordering logic is reversed in
+            // order to obtain a min-heap
+            lado.cmp(&nada),
+            std::cmp::Ordering::Greater
+        );
+    }
 }
 
 #[cfg(test)]
-mod best_move_tests {
+mod preprocessing_tests {
 
     use crate::Word;
-    use crate::get_best_move;
 
     #[test]
-    fn best_move_for_queijinho() {
-        let queijinho = Word::new("QUEIJINHO");
-
+    fn mixed_casing() {
         assert_eq!(
-            get_best_move(&queijinho).unwrap(),
-            &Word::new("queijo")
+            "ABCDEFGH", 
+            Word::preprocess_word("AbCdEfGh")
         );
     }
 
     #[test]
-    fn best_move_for_raxcaaai() {
-        let raxcaaai = Word::new("raxcaaai");
+    fn diacritics() {
+        assert_eq!(
+            "PAOZINHO",
+            Word::preprocess_word("pãozinho")
+        );
 
         assert_eq!(
-            get_best_move(&raxcaaai).unwrap(),
-            &Word::new("xícara")
+            "ORGAO",
+            Word::preprocess_word("órgão")
         );
     }
 
     #[test]
-    fn best_move_for_abcvoltdefaemg() {
-        let abcvoltdefaemg = Word::new("abcvoltdefaemg");
+    fn diacritics_and_mixed_casing() {
+        assert_eq!(
+            "PAOZINHO",
+            Word::preprocess_word("pÃozÍnHo")
+        );
 
         assert_eq!(
-            get_best_move(&abcvoltdefaemg).unwrap(),
-            &Word::new("voLtaGem")
+            "ORGAO",
+            Word::preprocess_word("ÓrGãO")
         );
     }
 }

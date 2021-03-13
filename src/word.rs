@@ -64,7 +64,7 @@ impl Word {
         }
     }
 
-    fn preprocess_word(word: &str) -> String {
+    pub fn preprocess_word(word: &str) -> String {
         let letters = word.chars().map(String::from);
         letters
             .map(|j| match j.as_ref() {
