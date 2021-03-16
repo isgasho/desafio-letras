@@ -1,6 +1,9 @@
 use std::cmp::Reverse;
 use std::{cmp, collections::HashMap};
 
+use itertools::Itertools;
+use itertools::chain;
+
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub struct Word {
     pub word: String,
@@ -187,9 +190,7 @@ impl Word {
     pub fn get_occurrence(word: &str) -> HashMap<char, u32> {
         let mut counts: HashMap<char, u32> = HashMap::new();
 
-        let chars = word.chars();
-
-        for char in chars {
+        for char in word.chars() {
             *counts.entry(char).or_insert(0) += 1;
         }
 
