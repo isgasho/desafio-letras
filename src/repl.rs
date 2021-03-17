@@ -1,11 +1,11 @@
-use std::{collections::HashMap, io::{self, BufRead, Write}};
+use std::{
+    collections::HashMap,
+    io::{self, Write},
+};
 
-use colored::Colorize;
-
-use crate::{Word, get_solution};
+use crate::{solution::get_solution, Word};
 
 fn print_letters_left(occurrences: HashMap<char, u32>) {
-    
     let mut letters = Vec::with_capacity(5);
 
     for (letter, count) in occurrences {
@@ -25,22 +25,23 @@ fn print_letters_left(occurrences: HashMap<char, u32>) {
     letters
         .into_iter()
         .enumerate()
-        .for_each(|(idx, letter)| 
-            if idx == len-1 {
+        .for_each(|(idx, letter)| {
+            if idx == len - 1 {
                 print!("{}\n", letter);
             } else {
                 print!("{}, ", letter)
             }
-        );
+        }
+    );
 }
 
 pub fn start_loop() {
     let mut line = String::new();
     loop {
         eprint!("Digite as letras disponíveis nesta jogada: ");
-        
+
         if io::stdin().read_line(&mut line).is_err() {
-            eprintln!("{}: houve um problema na leitura de palavra.", "erro".red());
+            eprintln!("erro: houve um problema na leitura de palavra.");
             continue;
         }
 
@@ -53,11 +54,11 @@ pub fn start_loop() {
             0 => println!("Nenhuma palavra encontrada"),
             1 => {
                 let word = solution[0];
-                println!("{}, palavra de {} pontos.", word.word, word.score);
-            },
+                println!("{}, palavra de {} pontos.", word.text, word.score);
+            }
             _ => {
                 for word in solution.iter() {
-                    print!("{}, ", word.word)
+                    print!("{}, ", word.text)
                 }
                 let sum: u32 = solution.iter().map(|word| word.score).sum();
                 print!("total de {} pontos.\n", sum);
@@ -68,6 +69,7 @@ pub fn start_loop() {
             print!("Sobraram: ");
             print_letters_left(letters_left);
         }
+        println!();
 
         io::stdout().flush().unwrap();
     }

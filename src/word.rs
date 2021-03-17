@@ -1,12 +1,10 @@
-
-use std::{collections::HashMap};
-
+use std::collections::HashMap;
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub struct Word {
     /// The processed text of this word
-    pub word: String,
-    ///
+    pub text: String,
+    /// The counts of every single letter in the 
     pub occurrences: HashMap<char, u32>,
     pub score: u32,
 }
@@ -22,11 +20,11 @@ impl Ord for Word {
 
         // Checks for the smallest string between two words
         let tie_breaker = |word: &Word, other_word: &Word| {
-            let self_word_len = word.word.len();
-            let other_word_len = other_word.word.len();
+            let self_word_len = word.text.len();
+            let other_word_len = other_word.text.len();
 
             match self_word_len.cmp(&other_word_len) {
-                std::cmp::Ordering::Equal => word.word.cmp(&other.word),
+                std::cmp::Ordering::Equal => word.text.cmp(&other.text),
                 other => other,
             }
         };
@@ -52,7 +50,7 @@ impl std::fmt::Display for Word {
         writeln!(
             f,
             "Word: {}\nOccurrences: {:#?}, score: {}",
-            self.word, self.occurrences, self.score
+            self.text, self.occurrences, self.score
         )
     }
 }
@@ -67,7 +65,7 @@ impl From<HashMap<char, u32>> for Word {
         Self {
             occurrences: Word::get_occurrence(&word),
             score: Word::calculate_score(&word),
-            word,
+            text: word,
         }
     }
 }
@@ -78,7 +76,7 @@ impl Word {
         Self {
             occurrences: Word::get_occurrence(&word),
             score: Word::calculate_score(&word),
-            word,
+            text: word,
         }
     }
 
@@ -155,7 +153,7 @@ impl Word {
             let count = self.occurrences.get(letter);
 
             // If the current letter wasn't found on the other word,
-            // TODO
+            // then `self` cannot contain `other`.
             if count.is_none() {
                 return false;
             }

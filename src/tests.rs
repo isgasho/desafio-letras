@@ -1,27 +1,21 @@
 #[cfg(test)]
 mod best_move_tests {
 
+    use crate::solution::get_best_move;
     use crate::Word;
-    use crate::get_best_move;
 
     #[test]
     fn best_move_for_queijinho() {
         let queijinho = Word::new("QUEIJINHO");
 
-        assert_eq!(
-            get_best_move(&queijinho).unwrap(),
-            &Word::new("queijo")
-        );
+        assert_eq!(get_best_move(&queijinho).unwrap(), &Word::new("queijo"));
     }
 
     #[test]
     fn best_move_for_raxcaaai() {
         let raxcaaai = Word::new("raxcaaai");
 
-        assert_eq!(
-            get_best_move(&raxcaaai).unwrap(),
-            &Word::new("xícara")
-        );
+        assert_eq!(get_best_move(&raxcaaai).unwrap(), &Word::new("xícara"));
     }
 
     #[test]
@@ -34,7 +28,6 @@ mod best_move_tests {
         );
     }
 }
-
 
 #[cfg(test)]
 mod word_tests {
@@ -197,39 +190,23 @@ mod preprocessing_tests {
 
     #[test]
     fn mixed_casing() {
-        assert_eq!(
-            "ABCDEFGH", 
-            Word::preprocess_word("AbCdEfGh")
-        );
+        assert_eq!("ABCDEFGH", Word::preprocess_word("AbCdEfGh"));
     }
 
     #[test]
     fn diacritics() {
-        assert_eq!(
-            "PAOZINHO",
-            Word::preprocess_word("pãozinho")
-        );
+        assert_eq!("PAOZINHO", Word::preprocess_word("pãozinho"));
 
-        assert_eq!(
-            "ORGAO",
-            Word::preprocess_word("órgão")
-        );
+        assert_eq!("ORGAO", Word::preprocess_word("órgão"));
     }
 
     #[test]
     fn diacritics_and_mixed_casing() {
-        assert_eq!(
-            "PAOZINHO",
-            Word::preprocess_word("pÃozÍnHo")
-        );
+        assert_eq!("PAOZINHO", Word::preprocess_word("pÃozÍnHo"));
 
-        assert_eq!(
-            "ORGAO",
-            Word::preprocess_word("ÓrGãO")
-        );
+        assert_eq!("ORGAO", Word::preprocess_word("ÓrGãO"));
     }
 }
-
 
 #[cfg(test)]
 mod diff_tests {
@@ -247,10 +224,7 @@ mod diff_tests {
         count.insert('X', 1);
         count.insert('I', 1);
 
-        assert_eq!(
-            count,
-            abacaxi.get_occurrence_diff(&abaca)
-        );
+        assert_eq!(count, abacaxi.get_occurrence_diff(&abaca));
     }
 
     #[test]
@@ -264,9 +238,6 @@ mod diff_tests {
         count.insert('L', 1);
         count.insert('Y', 1);
 
-        assert_eq!(
-            count,
-            deadly.get_occurrence_diff(&dad)
-        );
+        assert_eq!(count, deadly.get_occurrence_diff(&dad));
     }
 }

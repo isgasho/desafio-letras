@@ -1,18 +1,25 @@
-/// TODO:
-///     Replace unreachable! calls with Result and Option
+/// https://github.com/vrmiguel/desafio-letras
+/// Por favor leia o README.md para mais detalhes sobre a implementação
 
-use std::collections::{BinaryHeap, HashMap};
+/// ​As palavras serão então inseridas em um min-heap, representado através de um BinaryHeap 
+/// da biblioteca padrão.
+/// ​Esta estrutura tem custo de inserção amortizado O(1) e é capaz de produzir um vetor ordenado de seus elementos em tempo O(n).
+/// A busca da melhor palavra é feita de maneira linear, iterando o banco de palavras, que está ordenado de maneira decrescente
+
+
+use std::collections::BinaryHeap;
 
 use lazy_static::lazy_static;
 
+mod repl;
 mod tests;
 mod word;
-mod repl;
+mod solution;
 
 use word::Word;
 
 lazy_static! {
-    static ref WORD_BANK: Vec<Word> = {
+    pub static ref WORD_BANK: Vec<Word> = {
         let words = [
             "Abacaxi",
             "Manada",
@@ -99,39 +106,8 @@ lazy_static! {
     };
 }
 
-pub fn get_best_move(word: &Word) -> Option<&'static Word> {
-    for entry in WORD_BANK.iter() {
-        if word.contains(&entry) {
-            return Some(entry);
-        }
-    }
-    None
-}
-
-pub fn get_solution(first_word: Word) -> (Vec<&'static Word>, HashMap<char, u32>) {
-    let mut solution = vec![];
-
-    let mut diff = HashMap::new();
-    let mut word = first_word;
-    let mut best_move = get_best_move(&word.clone());
-    
-    while !best_move.is_none() {
-        let best_move_word = best_move.unwrap();
-        solution.push(best_move_word);
-        diff = word.get_occurrence_diff(best_move_word);
-        word = Word::from(diff.clone());
-        best_move = get_best_move(&word.clone());
-    }
-
-    (solution, diff)
-}
 
 
 fn main() {
-
-    // let word = Word::new("xicara");
-
-    // let solutions = dbg!(get_solution(word));
-    
     repl::start_loop();
 }
