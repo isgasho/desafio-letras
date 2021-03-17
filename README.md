@@ -1,5 +1,6 @@
 # Desafio Letras
-Desafio prático para o processo seletivo da Letras
+Desafio prático para o processo seletivo da [Letras](https://www.letras.com/).
+
 
 # O problema
 
@@ -151,3 +152,46 @@ pub fn contains(&self, other: &Word) -> bool {
 }
 ```
 
+### Testes
+
+O programa inclui testes para grande parte de sua lógica interna.
+
+Para executar a bateria de teste:
+```
+cargo test
+```
+
+	running 18 tests
+	test tests::best_move_tests::best_move_for_abcvoltdefaemg ... ok
+	test tests::best_move_tests::best_move_for_queijinho ... ok
+	test tests::diff_tests::diff_between_abacaxi_and_abaca ... ok
+	test tests::best_move_tests::best_move_for_raxcaaai ... ok
+	test tests::occurrence_count_tests::letters_in_abbey ... ok
+	test tests::diff_tests::diff_between_deadly_and_dad ... ok
+	test tests::occurrence_count_tests::letters_in_egg ... ok
+	test tests::occurrence_count_tests::letters_in_potato ... ok
+	test tests::ordering_tests::lado_bigger_than_nada ... ok
+	test tests::ordering_tests::queijo_bigger_than_goiaba ... ok
+	test tests::preprocessing_tests::diacritics ... ok
+	test tests::preprocessing_tests::diacritics_and_mixed_casing ... ok
+	test tests::preprocessing_tests::mixed_casing ... ok
+	test tests::score_tests::test_every_letter ... ok
+	test tests::score_tests::word_score_1 ... ok
+	test tests::word_tests::ate_contains_tea ... ok
+	test tests::word_tests::batarang_contains_bat ... ok
+	test tests::word_tests::potato_does_not_contain_tomato ... ok
+
+	test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out
+
+### Exemplos
+
+```
+Digite as letras disponíveis nesta jogada: bxiacajajaaj
+ABACAXI, JA, JA, total de 36 pontos.
+Sobraram: J
+```
+
+```
+Digite as letras disponíveis nesta jogada: abc
+Nenhuma palavra encontrada
+```
