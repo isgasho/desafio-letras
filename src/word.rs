@@ -1,12 +1,12 @@
-use std::cmp::Reverse;
-use std::{cmp, collections::HashMap};
 
-use itertools::Itertools;
-use itertools::chain;
+use std::{collections::HashMap};
+
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub struct Word {
+    /// The processed text of this word
     pub word: String,
+    ///
     pub occurrences: HashMap<char, u32>,
     pub score: u32,
 }
@@ -21,9 +21,9 @@ impl Ord for Word {
         // If there's still a tie, the word that comes first in alphabetical order is to be chosen
 
         // Checks for the smallest string between two words
-        let tie_breaker = |word: &Word, other_word| {
+        let tie_breaker = |word: &Word, other_word: &Word| {
             let self_word_len = word.word.len();
-            let other_word_len = other.word.len();
+            let other_word_len = other_word.word.len();
 
             match self_word_len.cmp(&other_word_len) {
                 std::cmp::Ordering::Equal => word.word.cmp(&other.word),

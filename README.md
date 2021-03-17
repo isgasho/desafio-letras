@@ -18,12 +18,12 @@ usadas. Por exemplo, se você possui as letras "ybttaaa", você pode formar a pa
 
 ## Pontuações 
 
-1 ponto: E, A, I, O, N, R, T, L, S, U
-2 pontos: D, G
-3 pontos: B, C, M, P
-5 pontos: F, H, V
-8 pontos: J, X
-13 pontos: Q, Z
+* 1 ponto: E, A, I, O, N, R, T, L, S, U
+* 2 pontos: D, G
+* 3 pontos: B, C, M, P
+* 5 pontos: F, H, V
+* 8 pontos: J, X
+* 13 pontos: Q, Z
 
 ## Regras
 
