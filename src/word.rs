@@ -4,8 +4,10 @@ use std::collections::HashMap;
 pub struct Word {
     /// The processed text of this word
     pub text: String,
-    /// The counts of every single letter in the 
+    /// The amount of every single letter that this word contains
+    /// E.g. {'E': 1, 'G': 2} for the word "EGG"
     pub occurrences: HashMap<char, u32>,
+    /// This word's score as per the project description
     pub score: u32,
 }
 

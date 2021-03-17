@@ -167,8 +167,6 @@ mod ordering_tests {
         );
     }
 
-    // TODO: words with same score but differing lengths
-
     #[test]
     fn lado_bigger_than_nada() {
         let lado = Word::new("lado");
