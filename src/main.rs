@@ -129,8 +129,9 @@ pub fn get_solution(first_word: Word) -> (Vec<&'static Word>, HashMap<char, u32>
 
 fn main() {
 
-    let word = Word::new("manualnuvemnm");
+    // let word = Word::new("xicara");
 
-    let solutions = dbg!(get_solution(word));
+    // let solutions = dbg!(get_solution(word));
     
+    repl::start_loop();
 }
